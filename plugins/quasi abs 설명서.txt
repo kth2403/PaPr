@@ -1,0 +1,168 @@
+<absSettings>
+collider: shape, width, height
+offset: integer
+infront: boolean
+rotate: boolean
+cooldown: integer
+through: integer
+overwater: boolean
+passabilityLevel: integer
+groundtarget: integer
+selecttarget: integer
+
+Collider:
+shape: box or circle
+width: the width of the box or diameter Y of circle
+height: the height of the box or diameter X of circle.
+Default: No collider
+
+Offset:
+Set to a distance to offset the collider. Default: 0
+
+Infront:
+Set to true or false. When true, the collider will appear infront of the user. When false, the collider will center with the user. Default: false
+Rotate:
+Set to true or false. When true, the collider will rotate based on user¡¯s direction. When false, the collider will not rotate.
+Cooldown:
+Set to a number in frames until you can use the skill again. 60 frames is 1 second. Default: 0
+Through:
+Set to 0, 1, 2 or 3.
+0 ? goes through events and tiles
+1 ? goes through tiles, and stops when hits an event.
+2 ? goes through events, and stops when hits a tile.
+3 ? stops when hits an event or tile.
+Default: 0
+Overwater:
+Set to true or false. When true, the skill can go over water tiles.
+Passability Level:
+Passability levels are a new feature which sets wither a character can walk over water or deep water tiles.
+Set to 0, 1, 2 or 3.
+0 ? Default, Can only move on passable tiles
+1 ? Boat, Can only move on water 1 tiles
+2 ? Ship, Can only move on water 1 and water 2 tiles
+3 ? NEW, Can move on passable tiles and water 1 tiles
+4 ? NEW, Can move on passable tiles, water 1 and water 2 tiles
+Default: 0
+Groundtarget:
+Set to the max distance for targeting. If value is 0, groundtargeting will not be used. Default: 0
+Selecttarget:
+Set to the max distance for targeting. If value is 0, selecttargeting will not be used. Default: 0
+Skill Action Sequence:
+
+When a skill is casted, an action sequence can be played. This is done by using tag in the skill¡¯s note.
+image012
+There are many actions you can use. Here is the list:
+user casting [true OR false]
+user lock
+user unlock
+user speed [inc OR dec] [amount]
+user move [forward OR backward] [distance in pixels] [wait for completion? Default: false]
+user jump [forward OR backward] [distance in pixels] [wait for completion? Default: false]
+user jumphere [wait for completion? Default: false]
+user slide [wait for completion? Default: false]
+user teleport
+user directionfix [true OR false]
+user pose [poseName] [wait for completion? Default: false]
+user forceskill [skillId] [angleOffset]
+user animation [animationId]
+trigger
+store
+clearstore
+movetostored
+move [forward OR backward] [distance in pixels] [duration] [wait for completion? Default: false]
+wave [forward OR backward] [amplitude] [harmonics] [distance in pixels] [duration in frames] [wait for completion? Default: false]
+picture [fileName] [rotatable? Default: false] [baseDirection]
+trail [fileName] [rotatable? Default: false] [baseDirection]
+collider [show OR hide]
+animation [animationID]
+wait [duration]
+se [name] [volume] [pitch] [pan]
+globallock
+globalunlock
+User:
+These actions will act on the user.
+user casting [true OR false]
+When set to true the user will be marked as ¡°casting¡±. If he is hit with a skill that has ¡°cancel¡± on damage, this skill will be canceled.
+user lock
+Prevent any movement of the player until unlock
+user unlock
+The player will be able to move again
+user speed [inc OR dec] [amount]
+Increase or decrease the player¡¯s move speed by X amount
+user move [forward OR backward] [distance] [wait for completion? Default: false]
+Moves the player forward or backward by X pixels. If wait for completion is set to true, then the ABS will wait until the player has finished moving before going to the next step.
+user jump [forward OR backward] [distance in pixels] [wait for completion? Default: false]
+Makes the player jump forward or backward by X pixels, in Y frames. If wait for completion is set to true, then the ABS will wait until the player has finished moving before going to the next step.
+user jumphere [wait for completion? Default: false]
+Make the player jump to skill¡¯s location. If wait for completion is set to true, then the ABS will wait until the player has finished moving before going to the next step.
+user slide [wait for completion? Default: false]
+Make the player slide to skill¡¯s location. If wait for completion is set to true, then the ABS will wait until the player has finished moving before going to the next step.
+user teleport
+Make the player instantly teleport to skill¡¯s location.
+user directionfix [true OR false]
+If set to true, it will lock the player¡¯s direction to the current one. If set to false, it will unlock it.
+user pose [poseName] [wait for completion? Default: false]
+Make the player change its animation for a set pose. Needs Quasi Sprite to work.
+user forceskill [skillId]
+Forces the player to cast a skill, even if he didn¡¯t learn it.
+user animation [animationId] [angleOffset]
+Plays an animation at the users location.
+Skill/collider:
+These actions will act on the skill/collider.
+trigger
+This will trigger the skill. This is necessary for the skill to set damage, to have its animation showed, and to be used at all.
+store
+This will store the current colliders position. To be used with movetostored
+clearstore
+This will clear the stored colliders position. To be used with movetostored
+movetostore
+This will move the collider to the stored position.
+move [forward OR backward] [distance in pixels] [duration] [wait for completion? Default: false]
+Moves the skill forward or backward by X pixels for Y number of frames. If wait for completion is set to true, then the ABS will wait until the player has finished moving before going to the next step.
+wave [forward OR backward] [amplitude] [harmonics] [distance in pixels] [duration in frames] [wait for completion? Default: false]
+Moves the skill forward or backward in a wave pattern, using the amplitude and harmonics parameters, for X pixels, in Y frames. If wait for completion is set to true, then the ABS will wait until the player has finished moving before going to the next step.
+picture [fileName] [rotatable? Default: false] [baseDirection]
+Set the skill to be represented by a picture (e.g. for an arrow). Set the file name to the name of the picture without the extension. If rotatable is set to true, then the picture will rotate depending on the player¡¯s angle. Set base direction to where the picture is facing by default. 2 means facing down, 4 means facing left, 6 means facing right and 8 means facing up.
+You can set the picture to have an animation. For that, make your animation on a single line, going from left to right. Then in the filename, add #[numberOfFrames-WaitTimeBetweenFrames].
+Let¡¯s take an example:
+image013
+In this case, if I want it to wait 15 frames between each animation frame the picture would be named whatever#[3-15].
+image015
+trail [fileName] [rotatable? Default: false] [baseDirection]
+Set the skill to have a trail (e.g. for a grappling hook). Set the file name to the name of the picture without the extension. If rotatable is set to true, then the picture will rotate depending on the skill¡¯s angle. Set base direction to where the picture is facing by default. 2 means facing down, 4 means facing left, 6 means facing right and 8 means facing up.
+collider [show OR hide]
+Set to show or hide the skill¡¯s collider. This also shows the ground targeting and select targeting zones.
+animation [animationID]
+Play animation number [animationID] at skill¡¯s location.
+Other:
+wait [duration]
+Waits for [duration] frames before going to the next step
+se [name] [volume] [pitch] [pan]
+Plays a sound effect by [name] and set its [volume], [pitch] and [pan]
+globallock
+Locks every movement. Events and player. Only works if Quasi Movement Plus is installed
+globalunlock
+Unlocks every movement. Events and player. Only works if Quasi Movement Plus is installed
+Skills On Damage
+
+When a skill hits an enemy, some actions can be set to run. This is done by using <absOnDamage> tag in the skill¡¯s note.
+image017
+There are a few actions you can use. Here is the list:
+target move [towards OR away] [distance in pixels]
+target jump [towards OR away] [distance in pixels]
+target pose [poseName]
+target cancel
+user forceskill [skillId] [angleOffset]
+animationTarget [target]
+target move [towards OR away] [distance in pixels]
+Moves the target forward or backward by X pixels.
+target jump [towards OR away] [distance in pixels]
+Makes the target jump forward or backward by X pixels
+target pose [poseName]
+Makes the target take a set pose. Need Quasi Sprite to work
+target cancel
+Cancels target¡¯s current skill.
+user forceskill [skillId] [angleOffset]
+Forces the player to cast a skill, even if he didn¡¯t learn it.
+animationTarget [0 OR 1]
+Set to 0 to play animation at collider location. Set to 1 to play at targets location. Default: 0
